@@ -1,0 +1,14 @@
+server:
+  port: ${API_PORT:8081}
+
+logging:
+  level:
+    '[org.springframework.web]': ${API_LOGGING_LEVEL:info}
+
+springdoc:
+    swagger-ui:
+        path: /swagger-ui.html
+
+spring:
+    application:
+        name: producer
