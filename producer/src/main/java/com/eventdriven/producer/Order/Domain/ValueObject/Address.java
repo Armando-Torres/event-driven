@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Order.Domain;
+package com.eventdriven.producer.Order.Domain.ValueObject;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
