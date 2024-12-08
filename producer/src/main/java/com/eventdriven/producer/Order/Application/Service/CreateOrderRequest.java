@@ -2,7 +2,7 @@ package com.eventdriven.producer.Order.Application.Service;
 
 import java.util.List;
 
-import com.eventdriven.producer.Shared.Domain.LineItem;
+import com.eventdriven.producer.Order.Domain.ValueObject.LineItem;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
