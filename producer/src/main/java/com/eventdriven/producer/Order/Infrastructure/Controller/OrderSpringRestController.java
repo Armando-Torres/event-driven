@@ -94,7 +94,7 @@ public class OrderSpringRestController {
         @ApiResponse(responseCode = "500", description = "Server error while process", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
     })
     public ResponseEntity<List<OrderResponse>> getAllOrders(
-        @Parameter(example = "dream street, 12", description = "[optional] Address to looking for") @RequestParam(required = false) String address
+        @Parameter(description = "[optional] Address to looking for") @RequestParam(required = false) String address
     ) {
         List<OrderResponse> orders = this.getOrdersUseCase.invoke(address);
         
