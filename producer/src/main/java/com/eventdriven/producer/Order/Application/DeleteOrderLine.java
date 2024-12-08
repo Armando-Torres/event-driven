@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.eventdriven.producer.Order.Application.Service.OrderResponse;
 import com.eventdriven.producer.Order.Domain.Order;
 import com.eventdriven.producer.Order.Domain.OrderRepository;
+import com.eventdriven.producer.Order.Domain.ValueObject.Status;
 
 @Component
 public class DeleteOrderLine {
@@ -15,8 +16,16 @@ public class DeleteOrderLine {
     public OrderResponse invoke(Long orderId, Integer listItemPosition) {
         Order order = this.orderRepository.findById(orderId);
 
+        this.checkIfOrderIsOpen(order);
+
         this.orderRepository.deleteLine(order.getId(), listItemPosition);
 
         return new OrderResponse(order);
+    }
+
+    private void checkIfOrderIsOpen(Order order) {
+        if (order.getStatus() != Status.OPEN) {
+            throw new IllegalStateException(String.format("The order with id %d is CLOSED", order.getId()));
+        }
     }
 }
