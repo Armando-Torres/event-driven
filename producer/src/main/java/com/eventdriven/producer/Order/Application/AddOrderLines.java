@@ -29,7 +29,7 @@ public class AddOrderLines {
 
     private void checkIfOrderIsOpen(Order order) {
         if (order.getStatus() != Status.OPEN) {
-            throw new IllegalStateException(String.format("The order with id {%d} is CLOSED", order.getId()));
+            throw new IllegalStateException(String.format("The order with id %d is CLOSED", order.getId()));
         }
     }
 }
