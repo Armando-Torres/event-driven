@@ -1,4 +1,18 @@
 services:
+  producer:
+    image: openjdk:21-slim-buster
+    working_dir: /home/app/spring
+    entrypoint: "bash -c \"./mvnw clean package && java -jar target/producer-1.0.0.jar\""
+    environment:
+      API_PORT: 8081
+      API_LOGGING_LEVEL: info
+    ports:
+      - 8081:8081
+    volumes:
+      - ${PWD}/producer:/home/app/spring
+    networks:
+      - ed_demo
+
   kafka:
     image: apache/kafka:latest
     environment:
