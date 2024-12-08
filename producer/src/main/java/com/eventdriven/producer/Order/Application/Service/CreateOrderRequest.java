@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class OrderRequest {
+public class CreateOrderRequest {
     private String fullAddress;
 
     private String addressDetail;
