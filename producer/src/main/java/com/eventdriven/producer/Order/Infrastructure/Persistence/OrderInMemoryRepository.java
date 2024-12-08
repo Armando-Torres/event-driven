@@ -34,7 +34,9 @@ public class OrderInMemoryRepository implements OrderRepository{
 
     @Override
     public List<Order> findAll(OrderCriteria criteria) {
-        return this.repository.values().stream().toList();
+        return (criteria.getAddress().getAddress() != null)
+            ? this.repository.values().stream().filter(order -> order.getAddress().getAddress().equalsIgnoreCase(criteria.getAddress().getAddress()) ).toList() 
+            : this.repository.values().stream().toList();
     }
 
     @Override
