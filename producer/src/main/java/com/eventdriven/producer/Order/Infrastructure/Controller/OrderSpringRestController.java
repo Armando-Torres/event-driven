@@ -137,7 +137,7 @@ public class OrderSpringRestController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping(path = "/{id}")
+    @PatchMapping(path = "/{id}/address")
     @Operation(method = "Patch", summary = "Change the order address")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Address were updated"),
@@ -153,7 +153,7 @@ public class OrderSpringRestController {
         return ResponseEntity.ok(order);
     }
 
-    @PatchMapping(path = "/{id}", consumes = MediaType.ALL_VALUE)
+    @PatchMapping(path = "/{id}/status", consumes = MediaType.ALL_VALUE)
     @Operation(method = "Patch", summary = "Set the order as closed")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Order was closed"),
@@ -161,7 +161,7 @@ public class OrderSpringRestController {
         @ApiResponse(responseCode = "500", description = "Server error while process", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
     })
     public ResponseEntity<OrderResponse> closeOrder(    
-        @Parameter(example = "12", description = "The order id") @PathVariable Long id
+        @Parameter(example = "100", description = "The order id") @PathVariable Long id
     ) {
         OrderResponse order = this.setCloseToOrder.invoke(id);
 
