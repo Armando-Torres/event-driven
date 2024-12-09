@@ -18,9 +18,11 @@ public class DeleteOrderLine {
 
         this.checkIfOrderIsOpen(order);
 
-        this.orderRepository.deleteLine(order.getId(), listItemPosition);
+        order.getItems().remove(listItemPosition.intValue());
 
-        return new OrderResponse(order);
+        Order newOrder = this.orderRepository.save(order);
+
+        return new OrderResponse(newOrder);
     }
 
     private void checkIfOrderIsOpen(Order order) {

@@ -22,9 +22,11 @@ public class AddOrderLines {
 
         this.checkIfOrderIsOpen(order);
 
-        linesItems.stream().forEach(line -> this.orderRepository.addLine(order.getId(), line));
+        linesItems.stream().forEach(line -> order.getItems().add(line));
 
-        return new OrderResponse(order);
+        Order newOrder = this.orderRepository.save(order);
+
+        return new OrderResponse(newOrder);
     }
 
     private void checkIfOrderIsOpen(Order order) {

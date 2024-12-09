@@ -11,9 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import com.eventdriven.producer.Order.Application.Service.OrderResponse;
 import com.eventdriven.producer.Order.Domain.Order;
@@ -43,11 +41,7 @@ public class DeleteLineFromOrderTest {
         assertEquals(2, order.getItems().size());
         
         when(orderRepository.findById(102L)).thenReturn(order);
-
-        Mockito.doAnswer((Answer<Void>) invocation -> {
-            order.getItems().remove(0);
-            return null;
-        }).when(orderRepository).deleteLine(Mockito.any(), Mockito.any());
+        when(orderRepository.save(order)).thenReturn(order);
 
         OrderResponse response = useCase.invoke(102L, 0);
 

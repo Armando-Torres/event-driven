@@ -20,9 +20,11 @@ public class UpdateOrderAddress {
 
         this.checkIfOrderIsOpen(order);
 
-        this.orderRepository.editAddress(order.getId(), newAddress);
+        order.setAddress(newAddress);
+
+        Order newOrder = this.orderRepository.save(order);
         
-        return new OrderResponse(order);
+        return new OrderResponse(newOrder);
     }
 
     private void checkIfOrderIsOpen(Order order) {

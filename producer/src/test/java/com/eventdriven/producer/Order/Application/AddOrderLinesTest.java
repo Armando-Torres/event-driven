@@ -11,9 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import com.eventdriven.producer.Order.Application.Service.OrderResponse;
 import com.eventdriven.producer.Order.Domain.Order;
@@ -42,14 +40,10 @@ public class AddOrderLinesTest {
         assertEquals(1, order.getItems().size());
         
         when(orderRepository.findById(101L)).thenReturn(order);
+        when(orderRepository.save(order)).thenReturn(order);
 
         LineItem item = new LineItem("item 2", 1, 1.60);
         List<LineItem> newItems = List.of(item);
-
-        Mockito.doAnswer((Answer<Void>) invocation -> {
-            order.getItems().add(item);
-            return null;
-        }).when(orderRepository).addLine(Mockito.any(), Mockito.any());
 
         OrderResponse response = useCase.invoke(101L, newItems);
 
