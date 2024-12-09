@@ -14,6 +14,7 @@ import com.eventdriven.producer.Order.Application.CreateOrder;
 import com.eventdriven.producer.Order.Application.DeleteOrderLine;
 import com.eventdriven.producer.Order.Application.GetOrder;
 import com.eventdriven.producer.Order.Application.GetOrders;
+import com.eventdriven.producer.Order.Application.SetCloseStatusToOrder;
 import com.eventdriven.producer.Order.Application.UpdateOrderAddress;
 import com.eventdriven.producer.Order.Application.Service.CreateOrderRequest;
 import com.eventdriven.producer.Order.Application.Service.OrderResponse;
@@ -60,6 +61,9 @@ public class OrderSpringRestController {
 
     @Autowired
     private UpdateOrderAddress updateOrderAddressUseCase;
+
+    @Autowired
+    private SetCloseStatusToOrder setCloseToOrder;
     
     @PostMapping()
     @Operation(method = "Post", summary = "Create new customer order")
@@ -145,6 +149,21 @@ public class OrderSpringRestController {
         @Parameter(description = "An order new line") @RequestBody Address address
     ) {
         OrderResponse order = this.updateOrderAddressUseCase.invoke(id, address);
+
+        return ResponseEntity.ok(order);
+    }
+
+    @PatchMapping(path = "/{id}")
+    @Operation(method = "Patch", summary = "Set the order as closed")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Order was closed"),
+        @ApiResponse(responseCode = "404", description = "When no orders found with the Id", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Server error while process", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    public ResponseEntity<OrderResponse> closeOrder(    
+        @Parameter(example = "12", description = "The order id") @PathVariable Long id
+    ) {
+        OrderResponse order = this.setCloseToOrder.invoke(id);
 
         return ResponseEntity.ok(order);
     }
