@@ -12,3 +12,8 @@ springdoc:
 spring:
     application:
         name: producer
+    kafka:
+      producer:
+        bootstrap-servers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer

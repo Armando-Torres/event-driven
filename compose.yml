@@ -6,6 +6,8 @@ services:
     environment:
       API_PORT: 8081
       API_LOGGING_LEVEL: info
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
     ports:
       - 8081:8081
     volumes:
