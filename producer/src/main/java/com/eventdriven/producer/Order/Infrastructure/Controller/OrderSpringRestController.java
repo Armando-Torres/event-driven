@@ -153,7 +153,7 @@ public class OrderSpringRestController {
         return ResponseEntity.ok(order);
     }
 
-    @PatchMapping(path = "/{id}")
+    @PatchMapping(path = "/{id}", consumes = MediaType.ALL_VALUE)
     @Operation(method = "Patch", summary = "Set the order as closed")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Order was closed"),
