@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Shared.Infrastructure;
+package com.eventdriven.producer.Shared.Infrastructure.Controller;
 
 import java.util.NoSuchElementException;
 
