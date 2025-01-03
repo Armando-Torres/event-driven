@@ -15,6 +15,8 @@ services:
       - ${PWD}/producer:/home/app/spring
     networks:
       - ed_demo
+    profiles:
+      - pro
 
   kafka:
     image: apache/kafka:latest
@@ -32,9 +34,12 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
     networks:
       - ed_demo
+    profiles:
+      - dev
+      - pre
   
   kafdrop:
-    image: obsidiandynamics/kafdrop:latest
+    image: obsidiandynamics/kafdrop:4.1.0
     ports:
       - 9000:9000
     environment:
@@ -42,6 +47,9 @@ services:
       JVM_OPTS: "-Xms32M -Xmx64M"
     networks:
       - ed_demo
+    profiles:
+      - dev
+      - pre
 
 networks:
   ed_demo:
