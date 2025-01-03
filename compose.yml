@@ -4,6 +4,7 @@ services:
     working_dir: /home/app/spring
     entrypoint: "bash -c \"./mvnw clean package && java -jar target/producer-1.0.0.jar\""
     environment:
+      JAVA_TOOL_OPTIONS: "-XX:UseSVE=0"
       API_PORT: 8081
       API_LOGGING_LEVEL: info
       KAFKA_HOST: kafka
