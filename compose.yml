@@ -16,14 +16,14 @@ services:
     networks:
       - ed_demo
     profiles:
-      - pro
+      - pre
 
   kafka:
-    image: apache/kafka:latest
+    image: apache/kafka-native:latest
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
@@ -32,6 +32,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_NUM_PARTITIONS: 3
     networks:
       - ed_demo
     profiles:
@@ -40,6 +41,8 @@ services:
   
   kafdrop:
     image: obsidiandynamics/kafdrop:4.1.0
+    depends_on:
+      - kafka
     ports:
       - 9000:9000
     environment:
