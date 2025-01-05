@@ -53,7 +53,7 @@ This project is dockerized. That means you can start and stop easily with simple
 
 ### Starting
 ```shell
-docker compose up -d
+docker compose --profile pre up -d
 ```
 
 ### Stopping
