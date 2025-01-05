@@ -35,10 +35,10 @@ One message publisher (productor), publish events of food-order type to send to 
 
 ```mermaid
 graph LR
-    A[RestAPI] -- produce food-order:event ----> B{Message broker}
+    A(RestAPI) -- produce food-order:event ----> B{{Message broker}}
 
     subgraph System
-        C[Consumer] -- send event to --> D{WebSocket}
+        C(Consumer) -- send event to --> D{{WebSocket}}
         C -- get food-order:events --> B
     end
 
