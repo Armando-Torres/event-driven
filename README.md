@@ -70,7 +70,7 @@ You have published in: [localhost:9000](http://localhost:9000) a software called
 The Orders RestAPI has published a Swagger page at: [localhost:8081](http://localhost:8081/swagger-ui/index.html). Once time you are in it just:
 
 1. Create a New Order
-2. [Optional] Add more items to your order if you want
+2. [Optional] Add more items, delete some others, play with the API if you want
 3. If you finish, set order as closed.
 
 When an Order is closed. One event of type food-order is created using a producer to publish into Kafka Customer-Order topic. After the event has been published the consumers listening for food-order events will take this information to do their actions.
