@@ -30,14 +30,16 @@ export class KafkaListenerImpl implements Listener {
                 // @ts-ignore
                 const payload = JSON.parse(message.value?.toString());
                 // @ts-ignore
-                
-                const lines: Set<OrderLine> = this.createLines(payload.items);
-                const address: string = this.createAddress(payload.address);
-                const order: Order = new Order(payload.id, address, lines);
 
-                this.listenerInstance.logger().info(`Order payload: ${order.toJSON()}`)
-
-                this.webSocket.send(order.toJSON());
+                if (payload.eventType == "food-order") {
+                    const lines: Set<OrderLine> = this.createLines(payload.data.items);
+                    const address: string = this.createAddress(payload.data.address);
+                    const order: Order = new Order(payload.data.id, address, lines);
+    
+                    this.listenerInstance.logger().info(`Order payload: ${order.toJSON()}`)
+    
+                    this.webSocket.send(order.toJSON());
+                }
             },
         })
     }
