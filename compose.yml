@@ -37,12 +37,12 @@ services:
 
   websocket:
     image: oven/bun:alpine
-    entrypoint: "/bin/sh -c \"bun run ws-server.ts\""
+    entrypoint: "/bin/sh -c \"if ! test -d node_modules; then bun install; fi && bun run ws-server.ts\""
     working_dir: /app
     ports:
       - 3000:3000
     volumes:
-      - ${PWD}/web-socket:/app:ro
+      - ${PWD}/websocket:/app:ro
     networks:
       - ed_demo
     profiles:
@@ -86,7 +86,7 @@ services:
       WS_SERVER_PORT: 3000
     working_dir: /app
     volumes:
-      - ${PWD}/ts-consumer:/app
+      - ${PWD}/consumer:/app
     networks:
       - ed_demo
     profiles:
@@ -95,14 +95,14 @@ services:
 
   web-static:
     image: oven/bun:alpine
-    entrypoint: "/bin/sh -c \"bun --watch run index.ts\""
+    entrypoint: "/bin/sh -c \"if ! test -d node_modules; then bun install; fi && bun --watch run index.ts\""
     depends_on:
       - websocket
     working_dir: /app
     ports:
       - 8080:8080
     volumes:
-      - ${PWD}/web-consumer:/app:ro
+      - ${PWD}/static:/app:ro
     networks:
       - ed_demo
     profiles:
