@@ -31,7 +31,7 @@ It's a simple static html served by BunJS webserver to view in a GUI (Graphic Us
 This expose a websocket server created with TypeScript and BunJS. Their responsability is translade events from a consumer to a web environment in real-time with zero delay.
 
 ## How it's works
-One message publisher (productor), publish events of food-order type to send to the message broker software. Once time message broker has the event in their topic the consumers listen for that kind of events processing it and do their task and actions.
+One event publisher (productor), publish events of food-order type to send to the message broker software. Once time message broker has the event in their topic the consumers listen for that kind of events processing it and do their task and actions.
 
 ```mermaid
 graph LR
@@ -45,18 +45,18 @@ graph LR
     E(Static web) -- live steam data from ----> D
 
 ```
-In event-driven architectures, you can scale as needed, with all consumers as you need and producers too. This approach enables seamless communication between multiple software components (performing different tasks) while maintaining low latency and data integrity.
+In event-driven architectures, you can use all consumers as you need and producers too. This approach enables seamless communication between multiple software components (performing different tasks) while maintaining low latency and data integrity.
 
 ## Stating the system
 
 This project is dockerized. That means you can start and stop easily with simple commands (plug and play).
 
-### Starting
+### Start
 ```shell
-docker compose up -d
+docker compose --profile pre up -d
 ```
 
-### Stopping
+### Stop
 ```shell
 docker compose stop
 ```
@@ -70,7 +70,7 @@ You have published in: [localhost:9000](http://localhost:9000) a software called
 The Orders RestAPI has published a Swagger page at: [localhost:8081](http://localhost:8081/swagger-ui/index.html). Once time you are in it just:
 
 1. Create a New Order
-2. [Optional] Add more items to your order if you want
+2. [Optional] Add more items, delete some others, play with the API if you want
 3. If you finish, set order as closed.
 
 When an Order is closed. One event of type food-order is created using a producer to publish into Kafka Customer-Order topic. After the event has been published the consumers listening for food-order events will take this information to do their actions.
