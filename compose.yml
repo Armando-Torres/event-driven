@@ -1,23 +1,4 @@
 services:
-  producer:
-    image: openjdk:21-slim-buster
-    working_dir: /home/app/spring
-    entrypoint: "bash -c \"./mvnw clean package && java -jar target/producer-1.0.0.jar\""
-    environment:
-      JAVA_TOOL_OPTIONS: "-XX:UseSVE=0"
-      API_PORT: 8081
-      API_LOGGING_LEVEL: info
-      KAFKA_HOST: kafka
-      KAFKA_PORT: 9092
-    ports:
-      - 8081:8081
-    volumes:
-      - ${PWD}/producer:/home/app/spring
-    networks:
-      - ed_demo
-    profiles:
-      - pre
-
   kafka:
     image: apache/kafka-native:latest
     environment:
@@ -32,13 +13,13 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_NUM_PARTITIONS: 1
     networks:
       - ed_demo
     profiles:
       - dev
       - pre
-  
+
   kafdrop:
     image: obsidiandynamics/kafdrop:4.1.0
     depends_on:
@@ -48,6 +29,79 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka:9092
       JVM_OPTS: "-Xms32M -Xmx64M"
+    networks:
+      - ed_demo
+    profiles:
+      - dev
+      - pre
+
+  websocket:
+    image: oven/bun:alpine
+    entrypoint: "/bin/sh -c \"bun run ws-server.ts\""
+    working_dir: /app
+    ports:
+      - 3000:3000
+    volumes:
+      - ${PWD}/web-socket:/app:ro
+    networks:
+      - ed_demo
+    profiles:
+      - dev
+      - pre
+
+  producer:
+    image: openjdk:21-slim-buster
+    working_dir: /home/app/spring
+    entrypoint: "bash -c \"./mvnw clean package && java -jar target/producer-1.0.0.jar\""
+    depends_on:
+      - kafka
+      - websocket
+    environment:
+      JAVA_TOOL_OPTIONS: "-XX:UseSVE=0"
+      API_PORT: 8081
+      API_LOGGING_LEVEL: info
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+    ports:
+      - 8081:8081
+    volumes:
+      - ${PWD}/producer:/home/app/spring
+    networks:
+      - ed_demo
+    profiles:
+      - pre
+  
+  consumer:
+    image: oven/bun:alpine
+    entrypoint: "/bin/sh -c \"if ! test -d node_modules; then bun install; fi && bun run consumer.ts\""
+    depends_on:
+      - kafka
+      - websocket
+    environment:
+      KAFKA_BROKER_HOST: kafka
+      KAFKA_BROKER_PORT: 9092
+      KAFKA_TOPIC: customer-order
+      WS_SERVER_HOST: websocket
+      WS_SERVER_PORT: 3000
+    working_dir: /app
+    volumes:
+      - ${PWD}/ts-consumer:/app
+    networks:
+      - ed_demo
+    profiles:
+      - dev
+      - pre
+
+  web-static:
+    image: oven/bun:alpine
+    entrypoint: "/bin/sh -c \"bun --watch run index.ts\""
+    depends_on:
+      - websocket
+    working_dir: /app
+    ports:
+      - 8080:8080
+    volumes:
+      - ${PWD}/web-consumer:/app:ro
     networks:
       - ed_demo
     profiles:
