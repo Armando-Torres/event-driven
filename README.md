@@ -35,15 +35,15 @@ One message publisher (productor), publish events of food-order type to send to 
 
 ```mermaid
 graph LR
-    subgraph Web Context
-        E(Static web) -- steam data from --> D
-    end
-    
+    A[RestAPI] -- produce an food-order:event ----> B{Message broker}
+
     subgraph System
-        A[RestAPI] -- produce an food-order:event --> B{Message broker}
-        C[Consumer] -- get food-order:events --> B
-        C -- send event to --> D{WebSocket}
+        C[Consumer] -- send event to --> D{WebSocket}
+        C -- get food-order:events --> B
     end
+
+    E(Static web) -- steam data from ----> D
+
 ```
 In event-driven architectures, you can scale as needed, with all consumers as you need and producers too. This approach enables seamless communication between multiple software components (performing different tasks) while maintaining low latency and data integrity.
 
