@@ -1,35 +1,41 @@
-const clients = new Set<any>();
+import type { ServerWebSocket } from "bun";
+
+const clients = new Set<ServerWebSocket<unknown>>();
 
 const server = Bun.serve({
     port: 3000,
     fetch(req, server) {
-      // upgrade the request to a WebSocket
-      if (server.upgrade(req)) {
-        return; // do not return a Response
-      }
-      return new Response("Upgrade failed", { status: 500 });
+      const userAgent = req.headers.get('user-agent');
+      
+      server.upgrade(req, {
+        data: {
+          listener: (userAgent)
+        },
+      });
+  
+      return undefined;
     },
     websocket: {
       async open(ws) {
           console.log(`Connection opened: ${ws.remoteAddress}`);
-          clients.add(ws);
+          // @ts-ignore
+          if (ws.data.listener) {
+            clients.add(ws);
+          }
       },
       async close(ws, code, reason) {
-        console.log(`Connection closed: ${ws.remoteAddress}`);
-        clients.delete(ws);
+        console.log(`Connection closed: ${ws.remoteAddress} with code: ${code} ${reason}`);
+        // @ts-ignore
+        if (ws.data.listener) {
+          clients.delete(ws);
+        }
       },
       async message(ws, message) {
-        // Ensure message is sent only if the WebSocket is open
-        if (ws.readyState === WebSocket.OPEN) {
-          // @ts-ignore
-          ws.send(message);
-          console.log(`Sent back: ${message}`);
-        }
-
-        // Broadcast the received message to all connected clients
+        // Broadcast the received message to all listener role connected clients
         for (const client of clients) {
           if (client.readyState === WebSocket.OPEN) {
-            client.send(message as string); // Send message to the other clients
+            client.send(message as string);
+            console.log(`Sent back to ${client.remoteAddress}: ${message}`);
           }
         }
       },
