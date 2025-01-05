@@ -6,33 +6,50 @@ This project implements an Event-Driven architecture where you can see how it wo
 This project contains:
 
     - root (this folder)
-    |- /producer
     |- /consumer
+    |- /producer
+    |- /static
+    |- /websocket
     |- compose.yml
     |- README.md
     |- LICENSE
 
 ## The Producer (/producer)
 
-It's a project based in SpringBoot v3.4.0 who expose a RESTApi to create orders. These Orders will be published into the producer as event to allow be consumed for all the comsumers located in their places.
+It's a project based in SpringBoot v3.4.0 who expose a RESTApi to create orders. These Orders will be published using a producer as food-order events.
 
 ## The Consumer (/consumer)
 
-WiP
+TypeScript project supported by BunJS. It connect with message broker and consume events of food-order type. Then send the events to the websocket server. Other consumers will be can implemented to listen food-order events to do their domain logic, each of they require a new consumer following a cohesive implementation (each consumer do only one thing).
+
+## Static website (/static)
+
+It's a simple static html served by BunJS webserver to view in a GUI (Graphic User Interface) the events related with food-order. Connected with a websocket server is able to show information in real time.
+
+## WebSocket server (/websocket)
+
+This expose a websocket server created with TypeScript and BunJS. Their responsability is translade events from a consumer to a web environment in real-time with zero delay.
 
 ## How it's works
-One message publisher (productor), publish messages (or event) and send to the message broker software. That's the publish action do. Once time message broker has the event in their topic, it's given to the consumer for processing and do the task related with the event type getted.
+One message publisher (productor), publish events of food-order type to send to the message broker software. Once time message broker has the event in their topic the consumers listen for that kind of events processing it and do their task and actions.
 
 ```mermaid
-graph LR;
-    A[RestAPI] -- produce an event --> B{Message broker}
-    C([Consumer]) -- consume events from -->B;
+graph LR
+    subgraph Web Context
+        E(Static web) -- steam data from --> D
+    end
+    
+    subgraph System
+        A[RestAPI] -- produce an food-order:event --> B{Message broker}
+        C[Consumer] -- get food-order:events --> B
+        C -- send event to --> D{WebSocket}
+    end
 ```
-In event-driven architectures, you can scale as needed, with as many consumers and producers as required. This approach enables seamless communication between multiple software components (performing different tasks) while maintaining low latency and data integrity.
+In event-driven architectures, you can scale as needed, with all consumers as you need and producers too. This approach enables seamless communication between multiple software components (performing different tasks) while maintaining low latency and data integrity.
 
 ## Stating the system
 
-This project is dockerized. So, that means you can up and down easily with simple commands.
+This project is dockerized. That means you can start and stop easily with simple commands (plug and play).
 
 ### Starting
 ```shell
@@ -48,10 +65,14 @@ docker compose stop
 
 You have published in: [localhost:9000](http://localhost:9000) a software called: kafdrop. Kafdrop give a GUI to manage topics, partitions and messages into the Kafka cluster.
 
-### Produce an event
+### How Produce an event
 
-The Orders RestAPI is published with a Swagger page in the [localhost:8081](http://localhost:8081/swagger-ui/index.html). From this page you can send rest request to produce events with new orders.
+The Orders RestAPI has published a Swagger page at: [localhost:8081](http://localhost:8081/swagger-ui/index.html). Once time you are in it just:
 
-### Consumer
+1. Create a New Order
+2. [Optional] Add more items to your order if you want
+3. If you finish, set order as closed.
 
-WiP
+When an Order is closed. One event of type food-order is created using a producer to publish into Kafka Customer-Order topic. After the event has been published the consumers listening for food-order events will take this information to do their actions.
+
+You can see your orders created in live from the restaurant Order-TV at. [localhost:8080](http://localhost:8080)
