@@ -1,5 +1,9 @@
 # Event-driven architecture demo
 
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-highlight.svg)](https://sonarcloud.io/summary/new_code?id=Armando-Torres_event-driven)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Armando-Torres_event-driven&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Armando-Torres_event-driven) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Armando-Torres_event-driven&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Armando-Torres_event-driven) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Armando-Torres_event-driven&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Armando-Torres_event-driven) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Armando-Torres_event-driven&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Armando-Torres_event-driven) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Armando-Torres_event-driven&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Armando-Torres_event-driven)
+
 This project implements an Event-Driven architecture where you can see how it works while keeping the different parts separate, allowing communication between components from different contexts, each of which can use different technologies.
 
 ## Folder structure
