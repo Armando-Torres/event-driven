@@ -1,6 +1,5 @@
 package com.eventdriven.producer.order.application;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.eventdriven.producer.shared.domain.MessageProducer;
@@ -12,14 +11,14 @@ import com.eventdriven.producer.order.domain.vo.Status;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.AllArgsConstructor;
+
 @Component
+@AllArgsConstructor
 public class SetCloseStatusToOrder {
-    private final String topicName = "order-events";
+    private static final String TOPIC_NAME = "order-events";
 
-    @Autowired
     private OrderRepository orderRepository;
-
-    @Autowired
     private MessageProducer messageProducer;
 
     public OrderResponse invoke(Long orderId) {        
@@ -47,7 +46,7 @@ public class SetCloseStatusToOrder {
 
         try {
             FoodOrderEvent event = new FoodOrderEvent(order);
-            this.messageProducer.sendMessage(this.topicName, order.getId().toString(), objectMapper.writeValueAsString(event));
+            this.messageProducer.sendMessage(TOPIC_NAME, order.getId().toString(), objectMapper.writeValueAsString(event));
         } catch (JsonProcessingException e) {
             
         }        

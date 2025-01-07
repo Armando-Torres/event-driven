@@ -1,15 +1,15 @@
 package com.eventdriven.producer.shared.infrastructure.messagebroker;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.eventdriven.producer.shared.domain.MessageProducer;
 
-@Service
-public class KafkaProducer implements MessageProducer {
+import lombok.AllArgsConstructor;
 
-    @Autowired
+@Service
+@AllArgsConstructor
+public class KafkaProducer implements MessageProducer {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String topic, String key, String message) {

@@ -2,7 +2,6 @@ package com.eventdriven.producer.order.application;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.eventdriven.producer.order.application.service.OrderResponse;
@@ -11,10 +10,12 @@ import com.eventdriven.producer.order.domain.OrderRepository;
 import com.eventdriven.producer.order.domain.vo.LineItem;
 import com.eventdriven.producer.order.domain.vo.Status;
 
+import lombok.AllArgsConstructor;
+
 @Component
+@AllArgsConstructor
 public class AddOrderLines {
 
-    @Autowired
     private OrderRepository orderRepository;
 
     public OrderResponse invoke(Long orderId, List<LineItem> linesItems) {

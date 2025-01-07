@@ -2,7 +2,6 @@ package com.eventdriven.producer.order.infrastructure.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +28,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,26 +43,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @Tag(name = "Order demo producer Rest API", description = "Demo producer to publish events into Kafka topic")
 @RequestMapping(path = "/v1/order", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@AllArgsConstructor
 public class OrderSpringRestController {
-    @Autowired
     private CreateOrder createOrderUseCase;
-
-    @Autowired
     private GetOrders getOrdersUseCase;
-
-    @Autowired
     private GetOrder getOrderUseCase;
-
-    @Autowired
     private AddOrderLines addLinesUseCase;
-
-    @Autowired
     private DeleteOrderLine deleteLineUseCase;
-
-    @Autowired
     private UpdateOrderAddress updateOrderAddressUseCase;
-
-    @Autowired
     private SetCloseStatusToOrder setCloseToOrder;
     
     @PostMapping()
