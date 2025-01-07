@@ -1,8 +1,8 @@
-package com.eventdriven.producer.Order.Domain;
+package com.eventdriven.producer.order.domain;
 
 import java.util.List;
 
-import com.eventdriven.producer.Order.Domain.ValueObject.OrderCriteria;
+import com.eventdriven.producer.order.domain.vo.OrderCriteria;
 
 public interface OrderRepository {
     public Order save(Order order);

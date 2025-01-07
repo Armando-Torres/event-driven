@@ -1,8 +1,8 @@
-package com.eventdriven.producer.Order.Domain.Events;
+package com.eventdriven.producer.order.domain.events;
 
 import java.util.Date;
 
-import com.eventdriven.producer.Order.Domain.Order;
+import com.eventdriven.producer.order.domain.Order;
 
 import lombok.Getter;
 
