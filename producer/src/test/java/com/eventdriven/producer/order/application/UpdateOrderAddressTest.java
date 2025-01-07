@@ -19,7 +19,7 @@ import com.eventdriven.producer.order.domain.vo.Address;
 import com.eventdriven.producer.order.domain.vo.Status;
 
 @ExtendWith(MockitoExtension.class)
-public class UpdateOrderAddressTest {
+class UpdateOrderAddressTest {
     @Mock 
     private OrderRepository orderRepository;
 

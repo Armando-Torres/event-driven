@@ -48,7 +48,7 @@ public class SetCloseStatusToOrder {
             FoodOrderEvent event = new FoodOrderEvent(order);
             this.messageProducer.sendMessage(TOPIC_NAME, order.getId().toString(), objectMapper.writeValueAsString(event));
         } catch (JsonProcessingException e) {
-            
+            // exception treatment
         }        
     }
 }

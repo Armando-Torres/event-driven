@@ -13,12 +13,12 @@ import com.eventdriven.producer.order.domain.vo.OrderCriteria;
 
 @Repository
 public class OrderInMemoryRepository implements OrderRepository{
-    HashMap<Long, Order> repository = new HashMap<Long, Order>(1000);
+    HashMap<Long, Order> repository = HashMap.newHashMap(1000);
 
     @Override
     public Order save(Order order) {
         if (order.getId() == null) {
-            Long id =  Integer.valueOf(this.repository.size() + 100).longValue();
+            Long id = (long) this.repository.size() + 100;
             order.setId(id);
         }
 

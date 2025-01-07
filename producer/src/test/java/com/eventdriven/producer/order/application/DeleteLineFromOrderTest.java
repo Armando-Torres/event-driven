@@ -21,7 +21,7 @@ import com.eventdriven.producer.order.domain.vo.LineItem;
 import com.eventdriven.producer.order.domain.vo.Status;
 
 @ExtendWith(MockitoExtension.class)
-public class DeleteLineFromOrderTest {
+class DeleteLineFromOrderTest {
     @Mock 
     private OrderRepository orderRepository;
 

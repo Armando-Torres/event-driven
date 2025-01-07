@@ -21,7 +21,7 @@ import com.eventdriven.producer.order.domain.vo.LineItem;
 import com.eventdriven.producer.order.domain.vo.Status;
 
 @ExtendWith(MockitoExtension.class)
-public class AddOrderLinesTest {
+class AddOrderLinesTest {
     @Mock 
     private OrderRepository orderRepository;
 

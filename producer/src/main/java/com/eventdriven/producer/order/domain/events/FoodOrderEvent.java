@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 public class FoodOrderEvent {
-    private final String eventType = "food-order";
+    private String eventType = "food-order";
 
     private Date timestamp;
 

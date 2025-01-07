@@ -3,7 +3,6 @@ package com.eventdriven.producer.order.application.service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.eventdriven.producer.order.domain.Order;
 
@@ -24,8 +23,8 @@ public class OrderResponse {
     public List<String> getListItems() {
         return customerOrder.getItems().stream()
             .map(item -> String.format("%s | %d | %.2f | %.2f", item.getDesc(), item.getQuantity(), item.getPrice(), item.getAmount()))
-            .collect(Collectors.toList());
-    };
+            .toList();
+    }
 
     public BigDecimal getNet() {
         return BigDecimal.valueOf(customerOrder.getNet()).setScale(2, RoundingMode.UP);

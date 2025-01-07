@@ -14,6 +14,5 @@ public class KafkaProducer implements MessageProducer {
 
     public void sendMessage(String topic, String key, String message) {
         this.kafkaTemplate.send(topic, key, message);
-        System.out.println("Message sent to Kafka topic " + topic + " with " + key + ": " + message);
     }
 }

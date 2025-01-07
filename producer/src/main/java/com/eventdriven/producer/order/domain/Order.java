@@ -11,7 +11,7 @@ import lombok.NonNull;
 
 @Data
 public class Order {
-    private Long Id;
+    private Long id;
 
     @NonNull
     private Address address;
