@@ -1,11 +1,13 @@
-package com.eventdriven.producer.Order.Application.Service;
+package com.eventdriven.producer.order.application.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.eventdriven.producer.order.domain.Order;
+
 import lombok.AllArgsConstructor;
-import com.eventdriven.producer.Order.Domain.Order;
 
 @AllArgsConstructor
 public class OrderResponse {

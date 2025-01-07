@@ -13,12 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.eventdriven.producer.Order.Application.Service.OrderResponse;
-import com.eventdriven.producer.Order.Domain.Order;
-import com.eventdriven.producer.Order.Domain.OrderRepository;
-import com.eventdriven.producer.Order.Domain.ValueObject.Address;
-import com.eventdriven.producer.Order.Domain.ValueObject.LineItem;
-import com.eventdriven.producer.Order.Domain.ValueObject.Status;
+import com.eventdriven.producer.order.application.DeleteOrderLine;
+import com.eventdriven.producer.order.application.service.OrderResponse;
+import com.eventdriven.producer.order.domain.Order;
+import com.eventdriven.producer.order.domain.OrderRepository;
+import com.eventdriven.producer.order.domain.vo.Address;
+import com.eventdriven.producer.order.domain.vo.LineItem;
+import com.eventdriven.producer.order.domain.vo.Status;
 
 @ExtendWith(MockitoExtension.class)
 public class DeleteLineFromOrderTest {

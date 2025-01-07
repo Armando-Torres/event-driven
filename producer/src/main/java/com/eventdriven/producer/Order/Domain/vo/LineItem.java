@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Order.Domain.ValueObject;
+package com.eventdriven.producer.order.domain.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

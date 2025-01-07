@@ -1,8 +1,8 @@
-package com.eventdriven.producer.Order.Application.Service;
+package com.eventdriven.producer.order.application.service;
 
 import java.util.List;
 
-import com.eventdriven.producer.Order.Domain.ValueObject.LineItem;
+import com.eventdriven.producer.order.domain.vo.LineItem;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

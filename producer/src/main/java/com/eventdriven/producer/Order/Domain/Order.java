@@ -1,10 +1,10 @@
-package com.eventdriven.producer.Order.Domain;
+package com.eventdriven.producer.order.domain;
 
 import java.util.List;
 
-import com.eventdriven.producer.Order.Domain.ValueObject.Address;
-import com.eventdriven.producer.Order.Domain.ValueObject.LineItem;
-import com.eventdriven.producer.Order.Domain.ValueObject.Status;
+import com.eventdriven.producer.order.domain.vo.Address;
+import com.eventdriven.producer.order.domain.vo.LineItem;
+import com.eventdriven.producer.order.domain.vo.Status;
 
 import lombok.Data;
 import lombok.NonNull;

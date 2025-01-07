@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Shared.Domain.ValueObject;
+package com.eventdriven.producer.shared.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

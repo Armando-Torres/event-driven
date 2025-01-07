@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Order.Infrastructure.Persistence;
+package com.eventdriven.producer.order.infrastructure.persistence;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.eventdriven.producer.Order.Domain.Order;
-import com.eventdriven.producer.Order.Domain.OrderRepository;
-import com.eventdriven.producer.Order.Domain.ValueObject.OrderCriteria;
+import com.eventdriven.producer.order.domain.Order;
+import com.eventdriven.producer.order.domain.OrderRepository;
+import com.eventdriven.producer.order.domain.vo.OrderCriteria;
 
 @Repository
 public class OrderInMemoryRepository implements OrderRepository{

@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Shared.Infrastructure.Controller;
+package com.eventdriven.producer.shared.infrastructure.controller;
 
 import java.util.NoSuchElementException;
 
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.eventdriven.producer.Shared.Domain.ValueObject.ErrorResponse;
+import com.eventdriven.producer.shared.domain.vo.ErrorResponse;
 
 @ControllerAdvice
 public class HandleExceptionController{

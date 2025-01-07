@@ -1,4 +1,4 @@
-package com.eventdriven.producer.Order.Infrastructure.Controller;
+package com.eventdriven.producer.order.infrastructure.controller;
 
 import java.util.List;
 
@@ -9,18 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eventdriven.producer.Order.Application.AddOrderLines;
-import com.eventdriven.producer.Order.Application.CreateOrder;
-import com.eventdriven.producer.Order.Application.DeleteOrderLine;
-import com.eventdriven.producer.Order.Application.GetOrder;
-import com.eventdriven.producer.Order.Application.GetOrders;
-import com.eventdriven.producer.Order.Application.SetCloseStatusToOrder;
-import com.eventdriven.producer.Order.Application.UpdateOrderAddress;
-import com.eventdriven.producer.Order.Application.Service.CreateOrderRequest;
-import com.eventdriven.producer.Order.Application.Service.OrderResponse;
-import com.eventdriven.producer.Order.Domain.ValueObject.Address;
-import com.eventdriven.producer.Order.Domain.ValueObject.LineItem;
-import com.eventdriven.producer.Shared.Domain.ValueObject.ErrorResponse;
+import com.eventdriven.producer.shared.domain.vo.ErrorResponse;
+import com.eventdriven.producer.order.application.AddOrderLines;
+import com.eventdriven.producer.order.application.CreateOrder;
+import com.eventdriven.producer.order.application.DeleteOrderLine;
+import com.eventdriven.producer.order.application.GetOrder;
+import com.eventdriven.producer.order.application.GetOrders;
+import com.eventdriven.producer.order.application.SetCloseStatusToOrder;
+import com.eventdriven.producer.order.application.UpdateOrderAddress;
+import com.eventdriven.producer.order.application.service.CreateOrderRequest;
+import com.eventdriven.producer.order.application.service.OrderResponse;
+import com.eventdriven.producer.order.domain.vo.Address;
+import com.eventdriven.producer.order.domain.vo.LineItem;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,15 +1,15 @@
-package com.eventdriven.producer.Order.Application;
+package com.eventdriven.producer.order.application;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.eventdriven.producer.Order.Application.Service.OrderResponse;
-import com.eventdriven.producer.Order.Domain.Order;
-import com.eventdriven.producer.Order.Domain.OrderRepository;
-import com.eventdriven.producer.Order.Domain.ValueObject.LineItem;
-import com.eventdriven.producer.Order.Domain.ValueObject.Status;
+import com.eventdriven.producer.order.application.service.OrderResponse;
+import com.eventdriven.producer.order.domain.Order;
+import com.eventdriven.producer.order.domain.OrderRepository;
+import com.eventdriven.producer.order.domain.vo.LineItem;
+import com.eventdriven.producer.order.domain.vo.Status;
 
 @Component
 public class AddOrderLines {
